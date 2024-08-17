@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/home.css'; // Import the CSS file for this page
@@ -8,24 +8,54 @@ import Footer from '../components/footer'; // Import the Footer component
 import episodeUpdateDemo from '../assets/images/landingPageImages/episodeUpdateDemo.png';
 import merchCarouselImage from '../assets/images/landingPageImages/merchCarouselImage.png';
 import subscribeCarouselImage from '../assets/images/landingPageImages/subscribeCarouselImage.png';
-import femaleIconDemo from '../assets/images/landingPageImages/femaleIconDemo.png';
-import maleIconDemo from '../assets/images/landingPageImages/maleIconDemo.png';
-import shopButtonImage from '../assets/images/landingPageImages/shopButtonImage.png'
+import shopButtonImage from '../assets/images/landingPageImages/shopButtonImage.png';
 
 const HomePage = () => {
-    const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '' });
-  
-    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '' });
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    // Fetch reviews from the database on component mount
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('/api/reviews');
+        const data = await response.json();
+        setReviews(data);
+      } catch (error) {
+        console.log('Error fetching reviews:', error);
+      }
     };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Handle form submission logic here
-      console.log('Submitted review:', formData);
-      // Optionally, clear the form after submission
-      setFormData({ firstInitial: '', lastName: '', review: '' });
-    };
+    fetchReviews();
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log('Review submitted successfully');
+        setFormData({ firstInitial: '', lastName: '', review: '' });
+
+        // Optionally, refetch reviews to update the displayed list
+        const updatedReviews = await response.json();
+        setReviews([...reviews, updatedReviews]);
+      } else {
+        console.log('Error submitting review');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
   return (
     <>
@@ -123,82 +153,16 @@ const HomePage = () => {
         </div>
       </div>
       <div className="listener-container">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <div className="row">
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={femaleIconDemo} alt="Cherakye Lopez" />
-                    <h2>Cherakye Lopez</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam suscipit atque accusamus, nobis totam eos?</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={maleIconDemo} alt="Nelson Reyes" />
-                    <h2>Nelson Reyes</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis dolore vero necessitatibus labore sed cum mollitia fugiat rem incidunt!</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={femaleIconDemo} alt="Sarah Read" />
-                    <h2>Sarah Read</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officiis.</p>
-                  </div>
-                </div>
-              </div>
+        {reviews.map((review, index) => (
+          <div key={index} className="card">
+            <div className="box front">
+              <h2>{`${review.firstInitial} ${review.lastName}`}</h2>
+            </div>
+            <div className="box back">
+              <p>{review.review}</p>
             </div>
           </div>
-          <div className="carousel-item">
-            <div className="row">
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={femaleIconDemo} alt="Deryshelle Crews" />
-                    <h2>Deryshelle Crews</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam suscipit atque accusamus, nobis totam eos?</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={maleIconDemo} alt="Freddy Walker" />
-                    <h2>Freddy Walker</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis dolore vero necessitatibus labore sed cum mollitia fugiat rem incidunt!</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card">
-                  <div className="box front">
-                    <img src={femaleIconDemo} alt="Andreya Bryson" />
-                    <h2>Andreya Bryson</h2>
-                  </div>
-                  <div className="box back">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officiis.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Review Submission Section */}
@@ -249,7 +213,6 @@ const HomePage = () => {
 
       {/* Footer */}
       <Footer />
-
     </>
   );
 };
