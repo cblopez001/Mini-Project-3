@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/landingPage.css'; // Import the CSS file for this page
+import '../assets/styles/home.css'; // Import the CSS file for this page
 import Footer from '../components/footer'; // Import the Footer component
 
 /* Import images */
@@ -13,6 +13,20 @@ import maleIconDemo from '../assets/images/landingPageImages/maleIconDemo.png';
 import shopButtonImage from '../assets/images/landingPageImages/shopButtonImage.png'
 
 const HomePage = () => {
+    const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '' });
+  
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Handle form submission logic here
+      console.log('Submitted review:', formData);
+      // Optionally, clear the form after submission
+      setFormData({ firstInitial: '', lastName: '', review: '' });
+    };
+
   return (
     <>
       {/* Accent Div */}
@@ -185,6 +199,50 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Review Submission Section */}
+      <div className="review-submission-container">
+        <h2>Submit Your Review</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="firstInitial">First Initial</label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstInitial"
+              name="firstInitial"
+              value={formData.firstInitial}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="review">Your Review</label>
+            <textarea
+              className="form-control"
+              id="review"
+              name="review"
+              value={formData.review}
+              onChange={handleChange}
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" className="btn btn-primary mt-3">Submit</button>
+        </form>
       </div>
 
       <div className="accent-div"></div>
