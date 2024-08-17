@@ -1,0 +1,22 @@
+ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: end;
+    width: 100%;
+  }
+  
+  .accent-div {
+    background-color: rgb(176, 57, 232);
+    text-decoration: hidden;
+    margin: 0;
+    padding: 2px;
+  }
+  
+  .carousel-accent-div {
+    background-color: rgb(176, 57, 232);
+    text-decoration: hidden;
+    margin: 0;
+    padding: 5px;
+  }
+  
