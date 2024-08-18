@@ -1,27 +1,21 @@
-// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/navBar';
-import Home from './pages/homePage';
-import Episodes from './pages/episodePage';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/homePage';
+import AboutPage from './pages/aboutPage';
+import ContactPage from './pages/contactPage';
+import EpisodePage from './pages/episodePage';
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/episodes" element={<Episodes />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/episodes" element={<EpisodePage />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default App;
-

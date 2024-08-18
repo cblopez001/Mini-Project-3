@@ -1,0 +1,46 @@
+@import './index.css';
+
+/* Contact Page Styles */
+.contact-container {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h1 {
+  font-size: 2.5rem;
+  color: #262626;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.btn-primary {
+  background-color: rgb(176, 57, 232);
+  color: #262626;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: rgb(156, 47, 212);
+}
+
+.accent-div {
+  height: 50px;
+  background-color: rgb(176, 57, 232);
+}
