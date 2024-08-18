@@ -75,7 +75,7 @@ const episodes = [
   },
 ];
 
-const EpisodeList = () => {
+const EpisodePage = () => {
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
