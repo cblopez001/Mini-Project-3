@@ -1,9 +1,9 @@
 /* index.css */
-@import './assets/styles/navBar.css';  /* If you have specific styles for Navbar */
-@import './assets/styles/home.css';         /* If you have specific styles for Home page */
-@import './assets//styles/episode.css';     /* If you have specific styles for Episodes page */
-@import './assets/styles/about.css';         /* If you have specific styles for About page */
-@import './assets/styles/contact.css';   /* If you have specifc styles for Contact page */
+@import './navBar.css';  /* If you have specific styles for Navbar */
+@import './home.css';         /* If you have specific styles for Home page */
+@import './episode.css';     /* If you have specific styles for Episodes page */
+@import './about.css';         /* If you have specific styles for About page */
+@import './contact.css';   /* If you have specifc styles for Contact page */
 
 *,.sedan-regular {
     font-family: "Sedan", serif;

@@ -1,5 +1,5 @@
 // controllers/reviewController.js
-const Review = require('../models/Review');
+const Review = require('../models/reviewModel');
 
 exports.getReviews = async (req, res) => {
   try {
