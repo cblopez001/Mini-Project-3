@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/about.css'; // Import the CSS file for this page
 import Footer from '../components/footer'; // Import the Footer component
+import NavBar from '../components/navBar';
 
 const AboutPage = () => {
   return (

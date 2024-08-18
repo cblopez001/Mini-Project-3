@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Navbar from '../components/navBar.jsx';
+import Navbar from '../components/navBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 import '../assets/styles/episode.css'; // Ensure this CSS file doesn't conflict with Font Awesome
@@ -152,3 +152,5 @@ const EpisodePage = () => {
     </div>
   );
 };
+
+export default EpisodePage;

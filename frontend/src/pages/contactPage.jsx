@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/contact.css'; // Import the CSS file for this page
 import Footer from '../components/footer'; // Import the Footer component
+import Navbar from '../components/navBar';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
