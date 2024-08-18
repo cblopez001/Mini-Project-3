@@ -2,7 +2,8 @@
 @import './components/navbar.css';  /* If you have specific styles for Navbar */
 @import './pages/landingPage.css';         /* If you have specific styles for Home page */
 @import './pages/Episodes.css';     /* If you have specific styles for Episodes page */
-@import './pages/shop.css';         /* If you have specific styles for Shop page */
+@import './pages/aboutPage.jsx';         /* If you have specific styles for About page */
+@import './pages/contactPage.jsx';   /* If you have specifc styles for Contact page */
 
 *,.sedan-regular {
     font-family: "Sedan", serif;
