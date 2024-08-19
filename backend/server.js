@@ -17,24 +17,21 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'public' directory in the frontend build
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/MonsterMashDatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+// Connect to MongoDB (remove deprecated options)
+mongoose.connect('mongodb://localhost:27017/MonsterMashDatabase')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
 // Use routes
-app.use('/api/reviews', reviewRoutes); // Route for handling reviews
-app.use('/api/subscribe', subscribeRoutes); // Route for handling newsletter subscriptions
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/subscribe', subscribeRoutes); // Use the correct route file
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'public.html'));
+  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // Error handling middleware
@@ -48,3 +45,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
