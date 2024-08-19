@@ -86,7 +86,8 @@ const EpisodePage = () => {
   });
 
   return (
-    <div>
+  <div>
+   <Navbar />
 
       <div className="accent-div"></div>
 

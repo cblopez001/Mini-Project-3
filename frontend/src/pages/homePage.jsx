@@ -59,7 +59,10 @@ const HomePage = () => {
   };
 
   return (
-    <>
+    <div>
+     {/* Navigation */}
+      <Navbar />
+
       {/* Accent Div */}
       <div className="accent-div"></div>
 
@@ -167,54 +170,68 @@ const HomePage = () => {
       </div>
 
       {/* Review Submission Section */}
-      <div className="review-submission-container">
-        <h2>Submit Your Review</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="firstInitial">First Initial</label>
-            <input
-              type="text"
-              className="form-control"
-              id="firstInitial"
-              name="firstInitial"
-              value={formData.firstInitial}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="review">Your Review</label>
-            <textarea
-              className="form-control"
-              id="review"
-              name="review"
-              value={formData.review}
-              onChange={handleChange}
-              rows="3"
-              required
-            ></textarea>
-          </div>
-          <button type="submit" className="btn btn-primary mt-3">Submit</button>
-        </form>
+<div className="submission-container">
+  <h2 className="text-center mb-4">Submit Your Review</h2>
+  <div className="row justify-content-center">
+    <div className="col-md-8 col-lg-6">
+      <div className="card shadow-sm">
+        <div className="card-body">
+          <h5 className="card-title text-center mb-4">Submit a Review</h5>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="initial" className="form-label">First Initial</label>
+              <input
+                type="text"
+                className="form-control"
+                id="initial"
+                name="firstInitial"
+                value={formData.firstInitial}
+                onChange={handleChange}
+                placeholder="J"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Doe"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="review" className="form-label">Your Review</label>
+              <textarea
+                className="form-control"
+                id="review"
+                name="review"
+                value={formData.review}
+                onChange={handleChange}
+                rows="3"
+                placeholder="Write your review here..."
+                required
+              ></textarea>
+            </div>
+            <div className="d-grid">
+              <button type="submit" className="btn btn-dark">
+                Submit Review
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div className="accent-div"></div>
-
-      {/* Footer */}
-      <Footer />
-    </>
+    </div>
+  </div>
+</div>
+  <div className="accent-div"></div>
+  {/* Footer */}
+  <Footer />
+    </div>
   );
 };
 
