@@ -220,7 +220,7 @@ const handleNewsletterSubmit = async (e) => {
                       name="firstInitial"
                       value={formData.firstInitial}
                       onChange={handleChange}
-                      placeholder="J"
+                      placeholder="First Initial"
                       required
                     />
                   </div>
@@ -233,7 +233,7 @@ const handleNewsletterSubmit = async (e) => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      placeholder="Doe"
+                      placeholder="Last Name"
                       required
                     />
                   </div>

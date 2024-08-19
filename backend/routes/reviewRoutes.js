@@ -1,9 +1,8 @@
-// routes/reviewRoutes.js
 const express = require('express');
 const { getReviews, submitReview } = require('../controllers/reviewController');
 const router = express.Router();
 
-router.get('/reviews', getReviews);
-router.post('/submit-review', submitReview);
+router.get('/', getReviews); // Route to get all reviews
+router.post('/', submitReview); // Route to submit a new review
 
 module.exports = router;

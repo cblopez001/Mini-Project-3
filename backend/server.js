@@ -29,8 +29,8 @@ mongoose.connect('mongodb://localhost:27017/MonsterMashDatabase', {
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
 // Use routes
-app.use('/api/reviews', reviewRoutes);
-app.use('/api/subscribe', subscribeRoutes); // Use the correct route file
+app.use('/api/reviews', reviewRoutes); // Route for handling reviews
+app.use('/api/subscribe', subscribeRoutes); // Route for handling newsletter subscriptions
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {

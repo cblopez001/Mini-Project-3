@@ -1,23 +1,25 @@
-// controllers/reviewController.js
-const Review = require('../models/reviewModel');
+const Review = require('../models/Review');
 
+// Get all reviews
 exports.getReviews = async (req, res) => {
   try {
     const reviews = await Review.find();
-    res.status(200).json(reviews);
+    res.json(reviews);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching reviews', error });
+    console.error('Error fetching reviews:', error);
+    res.status(500).json({ message: 'Failed to fetch reviews' });
   }
 };
 
+// Submit a new review
 exports.submitReview = async (req, res) => {
-  const { firstInitial, lastName, review } = req.body;
-  
   try {
+    const { firstInitial, lastName, review } = req.body;
     const newReview = new Review({ firstInitial, lastName, review });
-    await newReview.save();
-    res.status(201).json({ message: 'Review submitted successfully', newReview });
+    const savedReview = await newReview.save();
+    res.status(201).json(savedReview); // Respond with the new review
   } catch (error) {
-    res.status(500).json({ message: 'Error submitting review', error });
+    console.error('Error submitting review:', error);
+    res.status(500).json({ message: 'Failed to submit review' });
   }
 };
