@@ -31,7 +31,7 @@ app.use('/api/subscribe', subscribeRoutes); // Use the correct route file
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/src/pages/homePage.jsx', 'index.html'));
 });
 
 // Error handling middleware

@@ -19,7 +19,7 @@ const HomePage = () => {
     // Fetch reviews from the database on component mount
     const fetchReviews = async () => {
       try {
-        const response = await fetch('/api/reviews');
+        const response = await fetch('http://localhost:5000/api/reviews');
         const data = await response.json();
         setReviews(data);
       } catch (error) {
@@ -36,7 +36,7 @@ const HomePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/reviews', {
+      const response = await fetch('http://localhost:5000/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const handleNewsletterSubmit = async (e) => {
   const email = e.target.email.value;
 
   try {
-    const response = await fetch('/api/subscribe', {
+    const response = await fetch('http://localhost:5000/api/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

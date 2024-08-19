@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/about.css'; // Import the CSS file for this page
 import Footer from '../components/footer'; // Import the Footer component
 import NavBar from '../components/navBar';
 
+import maleIconDemo from '../assets/images/aboutImages/maleIconDemo.png'; // Correctly import male image
+import femaleIconDemo from '../assets/images/aboutImages/femaleIconDemo.png'; // Correctly import female image
+
 const AboutPage = () => {
   return (
     <>
-    < NavBar/>
+      <NavBar />
       <div className="about-container">
         <h1>About Us</h1>
         <section className="mission">
@@ -17,12 +20,12 @@ const AboutPage = () => {
         <section className="team">
           <h2>Meet the Team</h2>
           <div className="team-member">
-            <img src="../assets/images/team/member1.jpg" alt="Team Member 1" className="team-img" />
+            <img src={femaleIconDemo} alt="Jane Doe" className="team-img" /> {/* Use imported variable */}
             <h3>Jane Doe</h3>
             <p>Host and Producer</p>
           </div>
           <div className="team-member">
-            <img src="../assets/images/team/member2.jpg" alt="Team Member 2" className="team-img" />
+            <img src={maleIconDemo} alt="John Smith" className="team-img" /> {/* Use imported variable */}
             <h3>John Smith</h3>
             <p>Co-Host and Editor</p>
           </div>
