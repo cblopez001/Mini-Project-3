@@ -58,9 +58,36 @@ const HomePage = () => {
     }
   };
 
+
+const handleNewsletterSubmit = async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+
+  try {
+    const response = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (response.ok) {
+      console.log('Subscription successful');
+      // Optionally handle success (e.g., show a success message)
+    } else {
+      console.log('Error subscribing');
+      // Optionally handle errors (e.g., show an error message)
+    }
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+
   return (
     <div>
-     {/* Navigation */}
+      {/* Navigation */}
       <Navbar />
 
       {/* Accent Div */}
@@ -128,10 +155,16 @@ const HomePage = () => {
             <h1>NEWSLETTER</h1>
             <p>Never miss an episode. Sign up for our newsletter mailing list!</p>
           </div>
-          <form className="email-form">
+          <form className="email-form" onSubmit={handleNewsletterSubmit}>
             <div className="email-input">
               <i className="fa-regular fa-envelope"></i>
-              <input className="ebox" type="email" placeholder="Enter your email" />
+              <input
+                className="ebox"
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
               <button className="btn" type="submit">Subscribe</button>
             </div>
           </form>
@@ -170,67 +203,62 @@ const HomePage = () => {
       </div>
 
       {/* Review Submission Section */}
-<div className="submission-container">
-  <h2 className="text-center mb-4">Submit Your Review</h2>
-  <div className="row justify-content-center">
-    <div className="col-md-8 col-lg-6">
-      <div className="card shadow-sm">
-        <div className="card-body">
-          <h5 className="card-title text-center mb-4">Submit a Review</h5>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="initial" className="form-label">First Initial</label>
-              <input
-                type="text"
-                className="form-control"
-                id="initial"
-                name="firstInitial"
-                value={formData.firstInitial}
-                onChange={handleChange}
-                placeholder="J"
-                required
-              />
+      <div className="submission-container">
+        <h2 className="text-center mb-4">Submit Your Review</h2>
+        <div className="row justify-content-center">
+          <div className="col-md-8 col-lg-6">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title text-center mb-4">Submit a Review</h5>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="initial" className="form-label">First Initial</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="initial"
+                      name="firstInitial"
+                      value={formData.firstInitial}
+                      onChange={handleChange}
+                      placeholder="J"
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="lastName" className="form-label">Last Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Doe"
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="review" className="form-label">Your Review</label>
+                    <textarea
+                      className="form-control"
+                      id="review"
+                      name="review"
+                      rows="4"
+                      value={formData.review}
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-primary">Submit Review</button>
+                </form>
+              </div>
             </div>
-            <div className="mb-3">
-              <label htmlFor="lastName" className="form-label">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                placeholder="Doe"
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="review" className="form-label">Your Review</label>
-              <textarea
-                className="form-control"
-                id="review"
-                name="review"
-                value={formData.review}
-                onChange={handleChange}
-                rows="3"
-                placeholder="Write your review here..."
-                required
-              ></textarea>
-            </div>
-            <div className="d-grid">
-              <button type="submit" className="btn btn-dark">
-                Submit Review
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-  <div className="accent-div"></div>
-  {/* Footer */}
-  <Footer />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

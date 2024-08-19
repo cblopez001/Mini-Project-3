@@ -1,10 +1,11 @@
-// Import dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors'); // Add this
 
 // Import routes
 const reviewRoutes = require('./routes/reviewRoutes');
+const subscribeRoutes = require('./routes/subscribeRoutes'); // Add this
 
 // Initialize express application
 const app = express();
@@ -12,6 +13,9 @@ const app = express();
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Enable CORS
+app.use(cors()); // Add this
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,6 +30,7 @@ mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
 
 // Use routes
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/subscribe', subscribeRoutes); // Add this
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {
