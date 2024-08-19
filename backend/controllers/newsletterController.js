@@ -3,7 +3,7 @@ const axios = require('axios');
 const subscribeToNewsletter = async (req, res) => {
   const { email } = req.body;
 
-  // Replace with your Mailchimp API key and list ID
+  // Include Mailchimp, Key, List_ID, and Server
   const MAILCHIMP_API_KEY = 'Y2f9fffa693610744f94c04974ce433e2-us10';
   const LIST_ID = 'YOf826d9d778';
   const MAILCHIMP_SERVER_PREFIX = 'us10'; // e.g., 'us10'

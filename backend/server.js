@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const cors = require('cors'); // Add this
+const cors = require('cors');
 
 // Import routes
 const reviewRoutes = require('./routes/reviewRoutes');
-const subscribeRoutes = require('./routes/subscribeRoutes'); // Add this
+const subscribeRoutes = require('./routes/newsletterRoute'); // Ensure this file is a JS file for backend routing
 
 // Initialize express application
 const app = express();
@@ -15,13 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS
-app.use(cors()); // Add this
+app.use(cors());
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
+mongoose.connect('mongodb://localhost:27017/MonsterMashDatabase', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
 
 // Use routes
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/subscribe', subscribeRoutes); // Add this
+app.use('/api/subscribe', subscribeRoutes); // Use the correct route file
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {
