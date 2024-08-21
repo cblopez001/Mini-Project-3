@@ -1,12 +1,13 @@
+require('dotenv').config();
 const axios = require('axios');
 
 const subscribeToNewsletter = async (req, res) => {
   const { email } = req.body;
 
-  // Include Mailchimp, Key, List_ID, and Server
-  const MAILCHIMP_API_KEY = 'e7fafb698581a30e6b2b9d8ed6d70651-us10';
-  const LIST_ID = 'YOf826d9d778';
-  const MAILCHIMP_SERVER_PREFIX = 'us10'; // e.g., 'us10'
+  // Retrieve Mailchimp configurations from environment variables
+  const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+  const LIST_ID = process.env.LIST_ID;
+  const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX;
 
   try {
     const response = await axios.post(`https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`, {
