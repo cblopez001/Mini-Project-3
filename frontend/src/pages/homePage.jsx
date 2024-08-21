@@ -5,6 +5,10 @@ import '../assets/styles/home.css'; // Import the CSS file for this page
 import Footer from '../components/footer'; // Import the Footer component
 import Navbar from '../components/navBar';
 
+/* Import Font Awesome icons */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 /* Import images */
 import episodeUpdateDemo from '../assets/images/landingPageImages/episodeUpdateDemo.png';
 import merchCarouselImage from '../assets/images/landingPageImages/merchCarouselImage.png';
@@ -12,7 +16,7 @@ import subscribeCarouselImage from '../assets/images/landingPageImages/subscribe
 import shopButtonImage from '../assets/images/landingPageImages/shopButtonImage.png';
 
 const HomePage = () => {
-  const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '' });
+  const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '', rating: '' });
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -35,6 +39,7 @@ const HomePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const response = await fetch('http://localhost:5000/api/reviews', {
         method: 'POST',
@@ -43,11 +48,10 @@ const HomePage = () => {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         console.log('Review submitted successfully');
-        setFormData({ firstInitial: '', lastName: '', review: '' });
-
-        // Optionally, refetch reviews to update the displayed list
+        setFormData({ firstInitial: '', lastName: '', review: '', rating: '' }); // Clear the form
         const updatedReviews = await response.json();
         setReviews([...reviews, updatedReviews]);
       } else {
@@ -58,32 +62,40 @@ const HomePage = () => {
     }
   };
 
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
 
-const handleNewsletterSubmit = async (e) => {
-  e.preventDefault();
-  const email = e.target.email.value;
+    try {
+      const response = await fetch('http://localhost:5000/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
 
-  try {
-    const response = await fetch('http://localhost:5000/api/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (response.ok) {
-      console.log('Subscription successful');
-      // Optionally handle success (e.g., show a success message)
-    } else {
-      console.log('Error subscribing');
-      // Optionally handle errors (e.g., show an error message)
+      if (response.ok) {
+        console.log('Subscription successful');
+        // Optionally handle success (e.g., show a success message)
+      } else {
+        console.log('Error subscribing');
+        // Optionally handle errors (e.g., show an error message)
+      }
+    } catch (error) {
+      console.log('Error:', error);
     }
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
+  };
 
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, index) => (
+      <FontAwesomeIcon
+        key={index}
+        icon={faStar}
+        className={index < rating ? 'text-warning' : 'text-muted'} // Use text-warning for filled stars and text-muted for empty stars
+      />
+    ));
+  };
 
   return (
     <div>
@@ -189,11 +201,12 @@ const handleNewsletterSubmit = async (e) => {
           <h2>Listener Reviews</h2>
         </div>
       </div>
-      <div className="listener-container">
+      <div className="listener-container review-carousel">
         {reviews.map((review, index) => (
           <div key={index} className="card">
             <div className="box front">
               <h2>{`${review.firstInitial} ${review.lastName}`}</h2>
+              <div>{renderStars(review.rating)}</div>
             </div>
             <div className="box back">
               <p>{review.review}</p>
@@ -202,59 +215,61 @@ const handleNewsletterSubmit = async (e) => {
         ))}
       </div>
 
-      {/* Review Submission Section */}
-      <div className="submission-container">
-        <h2 className="text-center mb-4">Submit Your Review</h2>
-        <div className="row justify-content-center">
-          <div className="col-md-8 col-lg-6">
-            <div className="card shadow-sm">
-              <div className="card-body">
-                <h5 className="card-title text-center mb-4">Submit a Review</h5>
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label htmlFor="initial" className="form-label">First Initial</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="initial"
-                      name="firstInitial"
-                      value={formData.firstInitial}
-                      onChange={handleChange}
-                      placeholder="First Initial"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="lastName" className="form-label">Last Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="review" className="form-label">Your Review</label>
-                    <textarea
-                      className="form-control"
-                      id="review"
-                      name="review"
-                      rows="4"
-                      value={formData.review}
-                      onChange={handleChange}
-                      required
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-primary">Submit Review</button>
-                </form>
-              </div>
-            </div>
+      {/* Review Submission Form */}
+      <div className="review-form">
+        <h3>Submit Your Review</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="firstInitial">First Initial</label>
+            <input
+              type="text"
+              id="firstInitial"
+              name="firstInitial"
+              value={formData.firstInitial}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="review">Review</label>
+            <textarea
+              id="review"
+              name="review"
+              value={formData.review}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="rating">Rating</label>
+            <select
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select rating</option>
+              <option value="1">1 Star</option>
+              <option value="2">2 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="5">5 Stars</option>
+            </select>
+          </div>
+          <button type="submit">Submit Review</button>
+        </form>
       </div>
 
       {/* Footer */}

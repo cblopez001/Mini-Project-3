@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config(); // Load environment variables
 
 // Import routes
 const reviewRoutes = require('./routes/reviewRoutes');
-const subscribeRoutes = require('./routes/newsletterRoute'); // Ensure this file is a JS file for backend routing
+const subscribeRoutes = require('./routes/newsletterRoute');
+const episodeRoutes = require('./routes/episodeRoute'); // Import episode routes
 
 // Initialize express application
 const app = express();
@@ -17,21 +19,22 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 
-// Serve static files from the 'public' directory in the frontend build
+// Serve static files from the 'build' directory
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Connect to MongoDB (remove deprecated options)
-mongoose.connect('mongodb://localhost:27017/MonsterMashDatabase')
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMashDatabase')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
 // Use routes
+app.use('/api/episodes', episodeRoutes);
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/subscribe', subscribeRoutes); // Use the correct route file
+app.use('/api/subscribe', subscribeRoutes);
 
 // Catch-all route for frontend single-page application
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/src/pages/homePage.jsx', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 // Error handling middleware
@@ -45,4 +48,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-

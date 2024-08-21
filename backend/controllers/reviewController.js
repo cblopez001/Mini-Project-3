@@ -14,8 +14,14 @@ exports.getReviews = async (req, res) => {
 // Submit a new review
 exports.submitReview = async (req, res) => {
   try {
-    const { firstInitial, lastName, review } = req.body;
-    const newReview = new Review({ firstInitial, lastName, review });
+    const { firstInitial, lastName, review, rating } = req.body;
+
+    // Validate rating
+    if (rating < 1 || rating > 5) {
+      return res.status(400).json({ message: 'Rating must be between 1 and 5' });
+    }
+
+    const newReview = new Review({ firstInitial, lastName, review, rating });
     const savedReview = await newReview.save();
     res.status(201).json(savedReview); // Respond with the new review
   } catch (error) {
