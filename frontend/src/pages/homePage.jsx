@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/home.css'; // Import the CSS file for this page
-import Footer from '../components/footer'; // Import the Footer component
-import Navbar from '../components/navBar';
+import Footer from '../components/Footer'; // Import the Footer component
+import Navbar from '../components/Navbar';
 
 /* Import Font Awesome icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -77,10 +77,8 @@ const HomePage = () => {
 
       if (response.ok) {
         console.log('Subscription successful');
-        // Optionally handle success (e.g., show a success message)
       } else {
         console.log('Error subscribing');
-        // Optionally handle errors (e.g., show an error message)
       }
     } catch (error) {
       console.log('Error:', error);
@@ -152,7 +150,7 @@ const HomePage = () => {
               <Link to="/shop">
                 <img src={shopButtonImage} className="panel-img" alt="Merch Shop" />
                 <div className="overlay">
-                  <h3 className="panel-text">Merch Shop</h3>
+                  <h3 className="panel-text">Live Show</h3>
                 </div>
               </Link>
             </div>
@@ -215,62 +213,65 @@ const HomePage = () => {
         ))}
       </div>
 
-      {/* Review Submission Form */}
-      <div className="review-form">
-        <h3>Submit Your Review</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="firstInitial">First Initial</label>
-            <input
-              type="text"
-              id="firstInitial"
-              name="firstInitial"
-              value={formData.firstInitial}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="review">Review</label>
-            <textarea
-              id="review"
-              name="review"
-              value={formData.review}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="rating">Rating</label>
-            <select
-              id="rating"
-              name="rating"
-              value={formData.rating}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select rating</option>
-              <option value="1">1 Star</option>
-              <option value="2">2 Stars</option>
-              <option value="3">3 Stars</option>
-              <option value="4">4 Stars</option>
-              <option value="5">5 Stars</option>
-            </select>
-          </div>
-          <button type="submit">Submit Review</button>
-        </form>
-      </div>
+      <div className="submission-container">
+      <h3 className="form-title">Submit Your Review</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="firstInitial">First Initial</label>
+          <input
+            type="text"
+            id="firstInitial"
+            name="firstInitial"
+            value={formData.firstInitial}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="review">Review</label>
+          <textarea
+            id="review"
+            name="review"
+            value={formData.review}
+            onChange={handleChange}
+            required
+            className="form-control"
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <label htmlFor="rating">Rating</label>
+          <select
+            id="rating"
+            name="rating"
+            value={formData.rating}
+            onChange={handleChange}
+            required
+            className="form-control"
+          >
+            <option value="">Select Rating</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+          </select>
+        </div>
+        <button type="submit" className="btn">Submit Review</button>
+      </form>
+    </div>
 
       {/* Footer */}
       <Footer />
