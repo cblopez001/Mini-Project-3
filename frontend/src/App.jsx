@@ -6,6 +6,7 @@ import HomePage from './pages/homePage.jsx';
 import AboutPage from './pages/aboutPage.jsx';
 import ContactPage from './pages/contactPage.jsx';
 import EpisodePage from './pages/episodePage.jsx';
+import YouTubePage from './pages/youtubePage.jsx'; 
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/episodes" element={<EpisodePage />} />
+        <Route path="/youtube" element={<YouTubePage />} />
       </Routes>
     </div>
   );

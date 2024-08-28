@@ -95,7 +95,7 @@ body {
   
   .panel-wrapper:hover .overlay{
   background-color: #262626;
-  opacity: 1;
+  opacity: 0.5;
   }
   
   .panel-text{

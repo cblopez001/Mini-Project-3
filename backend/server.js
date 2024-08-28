@@ -4,11 +4,6 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config(); // Load environment variables
 
-// Import routes
-const reviewRoutes = require('./routes/reviewRoutes');
-const subscribeRoutes = require('./routes/newsletterRoute');
-const episodeRoutes = require('./routes/episodeRoute'); // Import episode routes
-
 // Initialize express application
 const app = express();
 
@@ -19,11 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 
-// Serve static files from the 'build' directory
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// Import routes
+const reviewRoutes = require('./routes/reviewRoutes');
+const subscribeRoutes = require('./routes/newsletterRoute');
+const episodeRoutes = require('./routes/episodeRoute');
+const youtubeRoutes = require('./routes/youtubeRoute');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMashDatabase')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMashDatabase', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
@@ -31,11 +32,18 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMash
 app.use('/api/episodes', episodeRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/subscribe', subscribeRoutes);
+app.use('/api/youtube', youtubeRoutes);
 
-// Catch-all route for frontend single-page application
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  // Handle SPA - Send index.html for any unknown routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {

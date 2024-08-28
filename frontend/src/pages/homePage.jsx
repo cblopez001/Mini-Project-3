@@ -132,7 +132,7 @@ const HomePage = () => {
 
       <div className="carousel-accent-div"></div>
 
-      {/* Shop and Episode Buttons */}
+      {/* Live and Episode Buttons */}
       <div className="link-container">
         <ul>
           <li>
@@ -147,8 +147,8 @@ const HomePage = () => {
           </li>
           <li>
             <div className="panel-wrapper">
-              <Link to="/shop">
-                <img src={shopButtonImage} className="panel-img" alt="Merch Shop" />
+              <Link to="/youtube">
+                <img src={shopButtonImage} className="panel-img" alt="Live Show" />
                 <div className="overlay">
                   <h3 className="panel-text">Live Show</h3>
                 </div>
@@ -272,6 +272,8 @@ const HomePage = () => {
         <button type="submit" className="btn">Submit Review</button>
       </form>
     </div>
+
+    <div className="accent-div"></div>
 
       {/* Footer */}
       <Footer />
