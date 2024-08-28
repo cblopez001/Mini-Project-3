@@ -6,7 +6,8 @@ router.get('/latest', async (req, res) => {
   try {
     const apiKey = process.env.YOUTUBE_API_KEY;
     const channelId = process.env.YOUTUBE_CHANNEL_ID;
-
+    console.log ('You hit me');
+    
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         key: apiKey,

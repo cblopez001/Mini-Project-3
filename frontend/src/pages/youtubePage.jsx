@@ -23,6 +23,7 @@ const YouTubePlayer = ({ videoId }) => {
 
 const YouTubePage = () => {
   const [latestVideoId, setLatestVideoId] = useState('');
+  console.log(import.meta.env.VITE_SERVER_BASE_URL);
   const [uploadedVideos, setUploadedVideos] = useState([]);
   const [error, setError] = useState('');
 
@@ -30,7 +31,7 @@ const YouTubePage = () => {
     // Fetch the latest video from the backend
     const fetchLatestVideo = async () => {
       try {
-        const response = await fetch('/api/youtube/latest');
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/youtube/latest`);
         const data = await response.json();
 
         console.log('Latest Video Data:', data); // Debugging line
