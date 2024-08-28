@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "git-filter-repo": "^0.0.30",
     "mailchimp-api-v3": "^1.15.0",
     "mongoose": "^8.5.3",
     "node-fetch": "^3.3.2"
