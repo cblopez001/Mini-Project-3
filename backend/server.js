@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 
+
 // Import routes
 const reviewRoutes = require('./routes/reviewRoutes');
 const subscribeRoutes = require('./routes/newsletterRoute');
@@ -21,12 +22,10 @@ const episodeRoutes = require('./routes/episodeRoute');
 const youtubeRoutes = require('./routes/youtubeRoute');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMashDatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMashDatabase')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
+
 
 // Use routes
 app.use('/api/episodes', episodeRoutes);

@@ -20,7 +20,7 @@
     "express": "^4.19.2",
     "git-filter-repo": "^0.0.30",
     "mailchimp-api-v3": "^1.15.0",
-    "mongoose": "^8.5.3",
+    "mongoose": "^8.6.0",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {

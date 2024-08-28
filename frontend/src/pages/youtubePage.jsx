@@ -30,8 +30,10 @@ const YouTubePage = () => {
     // Fetch the latest video from the backend
     const fetchLatestVideo = async () => {
       try {
-        const response = await fetch('/api/youtube/latest'); // Fetch the latest video from backend
+        const response = await fetch('/api/youtube/latest');
         const data = await response.json();
+
+        console.log('Latest Video Data:', data); // Debugging line
 
         if (response.ok && data.id) {
           setLatestVideoId(data.id); // Set the latest video ID
@@ -48,8 +50,10 @@ const YouTubePage = () => {
     // Fetch the uploaded videos from the backend
     const fetchUploadedVideos = async () => {
       try {
-        const response = await fetch('/api/youtube/uploads'); // Fetch uploaded videos from backend
+        const response = await fetch('/api/youtube/uploads');
         const data = await response.json();
+
+        console.log('Uploaded Videos Data:', data); // Debugging line
 
         if (response.ok && data.length > 0) {
           setUploadedVideos(data); // Set the list of uploaded videos
