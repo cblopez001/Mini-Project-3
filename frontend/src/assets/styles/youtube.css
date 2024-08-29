@@ -16,17 +16,17 @@ main {
 /* YouTube page container styling */
 .youtube-page-container {
   padding: 2rem;
-  max-width: 800px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Center text and elements within container */
+  text-align: center;
+  width: 80%;
 }
-
 /* YouTube video container styling */
 .youtube-container {
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
+  width: -webkit-fill-available;
 }
 
 /* Previously uploaded videos section */

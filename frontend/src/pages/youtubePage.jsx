@@ -51,7 +51,7 @@ const YouTubePage = () => {
     // Fetch the uploaded videos from the backend
     const fetchUploadedVideos = async () => {
       try {
-        const response = await fetch('/api/youtube/uploads');
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/youtube/latest`);
         const data = await response.json();
 
         console.log('Uploaded Videos Data:', data); // Debugging line

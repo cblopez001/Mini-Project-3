@@ -14,10 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS
 app.use(cors());
 
-
 // Import routes
 const reviewRoutes = require('./routes/reviewRoutes');
-const subscribeRoutes = require('./routes/newsletterRoute');
+const newsletterRoutes = require('./routes/newsletterRoute');// Ensure this file exists
 const episodeRoutes = require('./routes/episodeRoute');
 const youtubeRoutes = require('./routes/youtubeRoute');
 
@@ -26,11 +25,10 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/MonsterMash
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
-
 // Use routes
 app.use('/api/episodes', episodeRoutes);
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/subscribe', subscribeRoutes);
+app.use('/api', newsletterRoutes);;
 app.use('/api/youtube', youtubeRoutes);
 
 // Serve static assets if in production

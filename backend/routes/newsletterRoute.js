@@ -1,8 +1,8 @@
 const express = require('express');
-const { subscribeToNewsletter } = require('../controllers/newsletterController'); // Ensure this path is correct
 const router = express.Router();
+const newsletterController = require('../controllers/newsletterController');
 
-// Route to handle newsletter subscription
-router.post('/', subscribeToNewsletter);
+// Define route for subscribing to the newsletter
+router.post('/subscribe', newsletterController.subscribe);
 
 module.exports = router;

@@ -18,6 +18,8 @@ import shopButtonImage from '../assets/images/landingPageImages/shopButtonImage.
 const HomePage = () => {
   const [formData, setFormData] = useState({ firstInitial: '', lastName: '', review: '', rating: '' });
   const [reviews, setReviews] = useState([]);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     // Fetch reviews from the database on component mount
@@ -61,13 +63,11 @@ const HomePage = () => {
       console.log('Error:', error);
     }
   };
-
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-
+    
     try {
-      const response = await fetch('http://localhost:5000/api/subscribe', {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/subscribe`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,12 +76,13 @@ const HomePage = () => {
       });
 
       if (response.ok) {
-        console.log('Subscription successful');
+        setMessage('Subscription successful!');
+        setEmail(''); // Clear the email field after successful submission
       } else {
-        console.log('Error subscribing');
+        setMessage('Error subscribing. Please try again.');
       }
     } catch (error) {
-      console.log('Error:', error);
+      setMessage('Error subscribing. Please try again.');
     }
   };
 
@@ -171,13 +172,15 @@ const HomePage = () => {
               <input
                 className="ebox"
                 type="email"
-                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
               />
               <button className="btn" type="submit">Subscribe</button>
             </div>
           </form>
+          {message && <p>{message}</p>}
         </div>
         <div className="sub-platform">
           <div className="sub-message">
@@ -192,6 +195,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
 
       {/* Reviews Section */}
       <div className="review-container">

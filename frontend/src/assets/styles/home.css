@@ -270,6 +270,29 @@ body {
   transition: transform 0.5s;
   backface-visibility: hidden;
 }
+.card .box.back {
+  background: #262626;
+  transform: rotateY(180deg);
+  padding: 10px 20px;
+  text-align: center;
+  user-select: none;
+  color: #fff; /* Ensures text color is white */
+}
+
+/* If you have specific text elements, you can target them individually */
+.card .box.back p {
+  color: #fff; /* Ensures paragraph text color is white */
+}
+
+.card .box.back h2,
+.card .box.back h3,
+.card .box.back h4 {
+  color: #fff; /* Ensures heading text color is white */
+}
+
+.card .box.back .fa-quote-left {
+  color: #fff; /* Ensures FontAwesome icon color is white */
+}
 
 .card .box.front,
 .card .box.back {
@@ -278,6 +301,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #ffff;
 }
 
 .card .box.front img {
@@ -308,6 +332,7 @@ body {
   padding: 10px 20px;
   text-align: center;
   user-select: none;
+  color: #fff;
 }
 
 .card .box.back .fa-quote-left {
@@ -468,4 +493,3 @@ footer a:hover {
     height: auto;
   }
 }
-
