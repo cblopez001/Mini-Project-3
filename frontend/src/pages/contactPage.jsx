@@ -1,81 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/contact.css'; // Import the CSS file for this page
-import Footer from '../components/footer'; // Import the Footer component
-import Navbar from '../components/navBar';
+import Footer from '../components/Footer'; // Import the Footer component
+import Navbar from '../components/Navbar';
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        alert('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        alert('Error sending message.');
-      }
-    } catch (error) {
-      console.log('Error:', error);
-    }
-  };
-
   return (
     <>
-    < Navbar/>
-      <div className="contact-container">
-        <h1>Contact Us</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              className="form-control"
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows="5"
-              required
-            ></textarea>
-          </div>
-          <button type="submit" className="btn btn-primary mt-3">Send Message</button>
-        </form>
+      <Navbar />
+      <div className="contact-container text-center">
+        <h1>Thank You for Reaching Out!</h1>
+        <p className="lead">
+          We appreciate your interest in connecting with us! Whether you have a question, 
+          a suggestion for a new episode, or a video idea you'd like to see, we're all ears.
+        </p>
+        <p>
+          Feel free to share your thoughts, ideas, or any inquiries you have. Your input helps us create content 
+          that you love and enjoy!
+        </p>
+        <button 
+          className="btn btn-primary mt-4"
+          onClick={() => window.open('https://us10.list-manage.com/contact-form?u=fa89eaac4ba47413996871882&form_id=0c93f2cb7fca4eefdde5fc8f68082ad6', '_blank')}
+        >
+          Go to Contact Form
+        </button>
       </div>
 
       <div className="accent-div"></div>
