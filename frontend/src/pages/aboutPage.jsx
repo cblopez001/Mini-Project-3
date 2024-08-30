@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/about.css'; // Import the CSS file for this page
-import Footer from '../components/footer'; // Import the Footer component
-import NavBar from '../components/navBar';
+import Footer from '../components/Footer';  // Import the Footer component
+import Navbar from '../components/Navbar'; 
 
 import maleIconDemo from '../assets/images/aboutImages/maleIconDemo.png'; // Correctly import male image
 import femaleIconDemo from '../assets/images/aboutImages/femaleIconDemo.png'; // Correctly import female image
@@ -10,7 +10,7 @@ import femaleIconDemo from '../assets/images/aboutImages/femaleIconDemo.png'; //
 const AboutPage = () => {
   return (
     <>
-      <NavBar />
+
       <div className="about-container">
         <h1>About Us</h1>
         <section className="mission">

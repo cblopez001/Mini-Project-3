@@ -98,11 +98,9 @@ const HomePage = () => {
 
   return (
     <div>
-      {/* Navigation */}
-      <Navbar />
 
       {/* Accent Div */}
-      <div className="accent-div"></div>
+      <div className="carousel-accent-div"></div>
 
       <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">

@@ -27,7 +27,7 @@ const EpisodePage = () => {
 
   return (
     <div>
-      <Navbar />
+
       <div className="accent-div"></div>
 
       <div className="filter-container">

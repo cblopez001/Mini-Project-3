@@ -1,19 +1,15 @@
 // CommunityPage.jsx
 import React from 'react';
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/community.css'; // Import the CSS file for this page
 import Footer from '../components/Footer'; // Import the Footer component
-import Navbar from '../components/Navbar';
-
-import './CommunityPage.css'; // Import your custom CSS file for styling
-import { FaDiscord, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
+import Navbar from '../components/Navbar'; // Import the Navbar component
 
 const CommunityPage = () => {
   return (
+
     <div className="community-page">
-              {/* Navigation */}
-      <Navbar />
+
       {/* Discord Section */}
       <section className="community-section discord-section">
         <h2>Join Our Community on Discord</h2>
@@ -24,7 +20,7 @@ const CommunityPage = () => {
           rel="noopener noreferrer"
           className="discord-button"
         >
-          <FaDiscord className="icon" /> Join Our Discord
+          <i className="fab fa-discord icon"></i> Join Our Discord
         </a>
       </section>
 
@@ -39,7 +35,7 @@ const CommunityPage = () => {
             rel="noopener noreferrer"
             className="social-button instagram"
           >
-            <FaInstagram className="icon" /> Instagram
+            <i className="fab fa-instagram icon"></i> Instagram
           </a>
           <a
             href="https://facebook.com/your-facebook" // Replace with your Facebook link
@@ -47,7 +43,7 @@ const CommunityPage = () => {
             rel="noopener noreferrer"
             className="social-button facebook"
           >
-            <FaFacebook className="icon" /> Facebook
+            <i className="fab fa-facebook icon"></i> Facebook
           </a>
           <a
             href="https://youtube.com/your-youtube" // Replace with your YouTube link
@@ -55,12 +51,11 @@ const CommunityPage = () => {
             rel="noopener noreferrer"
             className="social-button youtube"
           >
-            <FaYoutube className="icon" /> YouTube
+            <i className="fab fa-youtube icon"></i> YouTube
           </a>
         </div>
       </section>
-            {/* Footer */}
-            <Footer />
+
     </div>
   );
 };

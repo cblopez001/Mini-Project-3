@@ -74,7 +74,7 @@ const YouTubePage = () => {
 
   return (
     <div className="page-wrapper">
-      <Navbar />
+ 
       <main className="youtube-page-container">
         <h1>Latest Show</h1>
         {error && <p className="error-message">{error}</p>}

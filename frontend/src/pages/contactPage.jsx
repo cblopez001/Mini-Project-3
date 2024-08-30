@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar';
 const ContactPage = () => {
   return (
     <>
-      <Navbar />
       <div className="contact-container text-center">
         <h1>Thank You for Reaching Out!</h1>
         <p className="lead">
