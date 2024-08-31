@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/home.css'; // Import the CSS file for this page
@@ -20,6 +20,7 @@ const HomePage = () => {
   const [reviews, setReviews] = useState([]);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     // Fetch reviews from the database on component mount
@@ -54,8 +55,8 @@ const HomePage = () => {
       if (response.ok) {
         console.log('Review submitted successfully');
         setFormData({ firstInitial: '', lastName: '', review: '', rating: '' }); // Clear the form
-        const updatedReviews = await response.json();
-        setReviews([...reviews, updatedReviews]);
+        const updatedReview = await response.json();
+        setReviews([...reviews, updatedReview]);
       } else {
         console.log('Error submitting review');
       }
@@ -63,6 +64,7 @@ const HomePage = () => {
       console.log('Error:', error);
     }
   };
+
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     
@@ -86,14 +88,61 @@ const HomePage = () => {
     }
   };
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <FontAwesomeIcon
-        key={index}
-        icon={faStar}
-        className={index < rating ? 'text-warning' : 'text-muted'} // Use text-warning for filled stars and text-muted for empty stars
-      />
-    ));
+  const ReviewsSection = ({ reviews }) => {
+    const [expandedIndex, setExpandedIndex] = useState(null);
+    const carouselRef = useRef(null);
+
+    const toggleExpand = (index) => {
+      setExpandedIndex(expandedIndex === index ? null : index);
+    }; 
+
+    const renderStars = (rating) => {
+      return Array.from({ length: 5 }, (_, index) => (
+        <FontAwesomeIcon
+          key={index}
+          icon={faStar}
+          className={index < rating ? 'text-warning' : 'text-muted'} // Use text-warning for filled stars and text-muted for empty stars
+        />
+      ));
+    };
+
+    const scrollCarousel = (direction) => {
+      if (carouselRef.current) {
+        const scrollAmount = direction === 'left' ? -300 : 300; // Adjust scroll amount as needed
+        carouselRef.current.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    return (
+      <div className="reviews-container">
+        <h2>Listener Reviews</h2>
+        <div className="carousel-wrapper">
+          <button className="carousel-control-btn" onClick={() => scrollCarousel('left')}>
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <div className="review-carousel" ref={carouselRef}>
+            {reviews.map((review, index) => (
+              <div className="review-card" key={index}>
+                <h4>{review.firstInitial} {review.lastName}</h4>
+                <div className="rating-stars">{renderStars(review.rating)}</div>
+                <p className={`review-text ${expandedIndex === index ? 'expanded' : 'collapsed'}`}>
+                  {review.review}
+                </p>
+                <button className="toggle-btn" onClick={() => toggleExpand(index)}>
+                  {expandedIndex === index ? 'Show Less' : 'Read More'}
+                </button>
+              </div>
+            ))}
+          </div>
+          <button className="carousel-control-btn" onClick={() => scrollCarousel('right')}>
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -102,6 +151,7 @@ const HomePage = () => {
       {/* Accent Div */}
       <div className="carousel-accent-div"></div>
 
+      {/* Main Carousel */}
       <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -130,6 +180,11 @@ const HomePage = () => {
       </div>
 
       <div className="carousel-accent-div"></div>
+      {/* Welcome Section */}
+      <section className="welcome-section">
+        <h1>Welcome to the Monster Mansion!</h1>
+        <p>Get ready to delve into the unknown as we explore the horrors that go bump in the night. Discover our collection of insightful reviews and engaging content from our horror movie review podcast. Prepare for a chilling journey into the depths of fear and fascination!</p>
+      </section>
 
       {/* Live and Episode Buttons */}
       <div className="link-container">
@@ -159,7 +214,7 @@ const HomePage = () => {
 
       {/* Subscribe Section */}
       <div className="subscription-container">
-        <div className="sub-email-container">
+      <div className="sub-email-container">
           <div className="email-message">
             <h1>NEWSLETTER</h1>
             <p>Never miss an episode. Sign up for our newsletter mailing list!</p>
@@ -194,27 +249,8 @@ const HomePage = () => {
         </div>
       </div>
 
-
-      {/* Reviews Section */}
-      <div className="review-container">
-        <div className="about-host">
-          <h2>Listener Reviews</h2>
-        </div>
-      </div>
-      <div className="listener-container review-carousel">
-        {reviews.map((review, index) => (
-          <div key={index} className="card">
-            <div className="box front">
-              <h2>{`${review.firstInitial} ${review.lastName}`}</h2>
-              <div>{renderStars(review.rating)}</div>
-            </div>
-            <div className="box back">
-              <p>{review.review}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
+      {/* Review Section */}
+      <ReviewsSection reviews={reviews} />
       <div className="submission-container">
       <h3 className="form-title">Submit Your Review</h3>
       <form onSubmit={handleSubmit}>
@@ -277,7 +313,6 @@ const HomePage = () => {
 
     <div className="accent-div"></div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

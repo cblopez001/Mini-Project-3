@@ -17,16 +17,6 @@
   font-style: normal;
 }
 
-/* General Styles */
-body {
-  background-color: whitesmoke;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-}
-
 .accent-div, .carousel-accent-div {
   background-color: rgb(176, 57, 232);
   padding: 2px;
@@ -39,6 +29,50 @@ body {
 
 .carousel-accent-div {
   padding: 5px;
+}
+
+
+/* General Styles */
+body {
+  font-family: 'Sedan', sans-serif;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  padding: 20px;
+  margin-top:8rem;
+}
+
+.welcome-section h1 {
+  font-size: 4.5rem;
+}
+
+.welcome-section p {
+  font-size: 1.5rem;
+}
+
+/* Carousel */
+.carousel-inner img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+@media (max-width: 768px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 10%;
+  }
 }
 
 /* Responsive Link Container */
@@ -63,7 +97,7 @@ body {
   width: 90%;
   max-width: 650px;
   height: auto;
-  margin: 100px auto;
+  margin: 80px auto;
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -101,7 +135,7 @@ body {
 
 .panel-text {
   color: #262626;
-  font-size: 4vw;
+  font-size: 50px;
   font-weight: bold;
   text-align: center;
   padding: 20px;
@@ -165,11 +199,14 @@ body {
 .btn {
   background-color: rgb(176, 57, 232);
   color: #262626;
-  text-transform: capitalize;
-  padding: 0 10px;
+  padding: 10px 20px; /* Adjust padding for desired size */
   cursor: pointer;
   border-radius: 5px;
-  font-size: 1.2em;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center text horizontally */
+  line-height: 1.5; /* Space underneath text */
 }
 
 .sub-platform {
@@ -198,60 +235,52 @@ i:hover {
   color: #f9f9f9;
 }
 
+
 /* Responsive Listener Review Section */
 .listener-container {
   margin: 5% 0;
   padding: 10px;
 }
 
-/* Review Carousel Wrapper */
+.reviews-container h2{
+    font-size: 5rem;
+    color: #262626;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Reviews Section */
 .review-carousel-wrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding: 20px;
 }
-
-/* Review Carousel Styles */
-.review-carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding: 20px;
+/* Hide scrollbar */
+.review-carousel::-webkit-scrollbar {
+  display: none;
 }
-
-/* Review Carousel Styles */
-.review-carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Review Carousel */
 .review-carousel {
   display: flex;
+  overflow:hidden;
   overflow-x: auto;
   padding: 10px;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   position: relative;
 }
-
-/* Hide scrollbar */
-.review-carousel::-webkit-scrollbar {
-  display: none;
+.reviews-container {
+  padding: 2rem;
 }
 
-/* Review Card Styles */
 .review-card {
   flex: 0 0 auto;
-  width: 300px; /* Default width for larger screens */
-  height: 400px;
+  width: 400px;
+  height: 300px;
   border-radius: 15px;
-  background-color: #262626;
+  background-color: #ffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
+  color: darkorchid;
   transition: transform 0.3s;
   display: flex;
   flex-direction: column;
@@ -260,87 +289,56 @@ i:hover {
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
-  scroll-snap-align: start; /* Align cards to start */
-  margin-right: 15px; /* Space between cards */
-  perspective: 1000px; /* Ensure 3D effect for card flip */
+  margin: .5rem;
 }
 
-.review-card .box {
+.review-card h4 {
+  margin-bottom: 0.5rem;
+}
+
+.rating-stars {
+  margin-bottom: 0.5rem;
+}
+
+.review-text {
   position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.5s;
-  backface-visibility: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-height: 3em; /* Adjust as needed */
 }
 
-.review-card .box.front {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #262626;
+.review-text.collapsed {
+  max-width: 200px; /* Adjust based on your design */
+}
+.review-text.expanded {
+  white-space: normal;
+  max-height: none;
 }
 
-.review-card .box.back {
-  background: #262626;
-  transform: rotateY(180deg);
-  padding: 10px 20px;
-  text-align: center;
-  user-select: none;
-  color: #fff; /* Ensures text color is white */
-}
-
-.review-card:hover .box.front {
-  transform: rotateY(180deg);
-}
-
-.review-card:hover .box.back {
-  transform: rotateY(0deg);
-}
-
-/* Hover Effect for Review Cards */
-.review-card:hover {
-  transform: scale(1.05);
-}
-
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
-  .review-carousel {
-    flex-direction: column;
-    align-items: center; /* Center the items */
-  }
-
-  .review-card {
-    width: 100vw; /* Full viewport width */
-    height: auto; /* Adjust height if necessary */
-    margin-right: 0; /* Remove right margin for single card display */
-    scroll-snap-align: center; /* Center align cards */
-  }
-}
-
-/* Carousel Arrows */
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #444;
-  color: #fff;
+.toggle-btn {
+  background: none;
   border: none;
-  border-radius: 50%;
-  padding: 10px;
+  color: darkorchid;
   cursor: pointer;
-  z-index: 10;
+  margin-top: 0.5rem;
 }
 
-.carousel-arrow.left {
-  left: 10px;
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.carousel-arrow.right {
-  right: 10px;
+.carousel-control-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
+.carousel-control-btn i {
+  font-size: 2rem;
+}
 /* Modern Submission Form Styles */
 .submission-container {
   margin: 0 auto 80px;
@@ -402,6 +400,7 @@ i:hover {
   border: none;
   font-size: 1.1em; /* Font size for button text */
   cursor: pointer;
+  text-align: center;
   transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
