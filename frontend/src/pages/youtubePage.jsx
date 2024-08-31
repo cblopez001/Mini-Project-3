@@ -51,7 +51,7 @@ const YouTubePage = () => {
     // Fetch the uploaded videos from the backend
     const fetchUploadedVideos = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/youtube/latest`);
+        const response = await fetch(`${import.meta.env.VITE_SERVER_BASE_URL}/api/youtube/uploads`);
         const data = await response.json();
 
         console.log('Uploaded Videos Data:', data); // Debugging line
@@ -77,7 +77,6 @@ const YouTubePage = () => {
  
       <main className="youtube-page-container">
         <h1>Latest Show</h1>
-        {error && <p className="error-message">{error}</p>}
         {latestVideoId ? (
           <YouTubePlayer videoId={latestVideoId} />
         ) : (

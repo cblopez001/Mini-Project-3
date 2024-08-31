@@ -24,7 +24,7 @@
 }
 
 .accent-div {
-  height: 10px;
+  height: 5px;
 }
 
 .carousel-accent-div {
@@ -108,11 +108,11 @@ body {
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 0.3s; /* Ensure smooth scaling transition */
 }
 
 .panel-wrapper:hover img {
-  transform: scale(1.2);
+  transform: scale(1.2); /* Slight zoom effect */
 }
 
 .overlay {
@@ -125,12 +125,14 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  transition: opacity 0.3s;
+  transition: background-color 0.3s, opacity 0.3s; /* Smooth transition */
+  z-index: 1; /* Place below text */
+  background-color: rgba(38, 38, 38, 0); /* Transparent initially */
 }
 
 .panel-wrapper:hover .overlay {
-  background-color: #262626;
-  opacity: 0.5;
+  background-color: rgba(38, 38, 38, 0.5); /* Dark overlay on hover */
+  opacity: 1; /* Maintain opacity to ensure visibility */
 }
 
 .panel-text {
@@ -139,7 +141,11 @@ body {
   font-weight: bold;
   text-align: center;
   padding: 20px;
+  z-index: 2; /* Ensure text stays on top */
+  position: relative; /* Position relative to ensure proper stacking */
+  transition: color 0.3s; /* Optional: Smooth color transition */
 }
+
 
 /* Subscription Section */
 .subscription-container {
@@ -355,10 +361,17 @@ i:hover {
   padding: 0;
   border-radius: 12px; /* Match border radius */
   background-color: #f9f9f9; /* Slightly off-white background for the card */
+  text-align: center; /* Center the title */
 }
 
 .submission-container .card-body {
   padding: 30px;
+}
+
+.submission-container h1 {
+  text-align: center; /* Center the form title */
+  margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .submission-container .form-label {
@@ -392,9 +405,9 @@ i:hover {
   height: 50px; /* Height for input fields */
 }
 
-.submission-container .btn {
+.submission-container .submit-btn {
   background-color: rgb(176, 57, 232); /* Primary color for button */
-  color: #ffffff; /* White text color */
+  color: #262626; /* White text color */
   padding: 12px 24px; /* Padding for a substantial button */
   border-radius: 8px; /* Rounded corners */
   border: none;
@@ -402,9 +415,11 @@ i:hover {
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  display: block; /* Make button block-level */
+  margin: 20px auto 0; /* Center the button */
 }
 
-.submission-container .btn:hover {
+.submission-container .submit-btn:hover {
   background-color: rgb(144, 46, 196); /* Darker color on hover */
   transform: translateY(-2px); /* Slight lift effect on hover */
 }
@@ -433,10 +448,6 @@ i:hover {
     padding: 20px;
   }
 
-  .btn {
-    font-size: 1em;
-    padding: 10px 20px;
-  }
 
   .panel-text {
     font-size: 2rem;

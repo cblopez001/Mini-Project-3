@@ -81,3 +81,25 @@
     margin-right: 8px;
   }
   
+/* Footer */
+footer {
+  background-color: #262626;
+  color: #fff;
+  padding: 2rem 0;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px; /* Space out footer links */
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright p{
+  color:#f9f9f9;
+}

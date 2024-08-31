@@ -7,11 +7,10 @@ import Navbar from '../components/Navbar'; // Import the Navbar component
 
 const CommunityPage = () => {
   return (
-
     <div className="community-page">
 
       {/* Discord Section */}
-      <section className="community-section discord-section">
+      <div className="community-section discord-section">
         <h2>Join Our Community on Discord</h2>
         <p>Connect with other listeners, discuss episodes, and get exclusive behind-the-scenes content by joining our Discord server!</p>
         <a
@@ -22,10 +21,10 @@ const CommunityPage = () => {
         >
           <i className="fab fa-discord icon"></i> Join Our Discord
         </a>
-      </section>
+      </div>
 
       {/* Social Media Section */}
-      <section className="community-section social-media-section">
+      <div className="community-section social-media-section">
         <h2>Follow Us on Social Media</h2>
         <p>Stay up to date with the latest podcast news, highlights, and more by following us on social media!</p>
         <div className="social-buttons">
@@ -54,7 +53,7 @@ const CommunityPage = () => {
             <i className="fab fa-youtube icon"></i> YouTube
           </a>
         </div>
-      </section>
+      </div>
 
     </div>
   );

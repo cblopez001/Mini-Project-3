@@ -182,7 +182,7 @@ const HomePage = () => {
       <div className="carousel-accent-div"></div>
       {/* Welcome Section */}
       <section className="welcome-section">
-        <h1>Welcome to the Monster Mansion!</h1>
+        <h1>Welcome to the Monster Mansion</h1>
         <p>Get ready to delve into the unknown as we explore the horrors that go bump in the night. Discover our collection of insightful reviews and engaging content from our horror movie review podcast. Prepare for a chilling journey into the depths of fear and fascination!</p>
       </section>
 
@@ -194,7 +194,7 @@ const HomePage = () => {
               <Link to="/episodes">
                 <img src={shopButtonImage} className="panel-img" alt="Episode List" />
                 <div className="overlay">
-                  <h3 className="panel-text">Episode List</h3>
+                  <h3 className="panel-text">Episode Library</h3>
                 </div>
               </Link>
             </div>
@@ -204,7 +204,7 @@ const HomePage = () => {
               <Link to="/youtube">
                 <img src={shopButtonImage} className="panel-img" alt="Live Show" />
                 <div className="overlay">
-                  <h3 className="panel-text">Live Show</h3>
+                  <h3 className="panel-text">Latest Videos</h3>
                 </div>
               </Link>
             </div>
@@ -307,7 +307,7 @@ const HomePage = () => {
             <option value="5">5 Stars</option>
           </select>
         </div>
-        <button type="submit" className="btn">Submit Review</button>
+        <button type="submit" className="submit-btn">Submit Review</button>
       </form>
     </div>
 
